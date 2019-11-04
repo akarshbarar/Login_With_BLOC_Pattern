@@ -44,7 +44,16 @@ class _LoginPageState extends State<LoginPage> {
               StreamBuilder<bool>(
                 stream: bloc.submitCheck,
                 builder:(context,snapshot)=> RaisedButton(
-                  onPressed: snapshot.hasData?bloc.submit:null,
+                  onPressed: (){
+                    if(!snapshot.hasData){
+                      return null;
+                    }
+                    else{
+                      Navigator.of(context).pushNamed("/home");
+                      return bloc.submit();
+                    }
+                    //snapshot.hasData?bloc.submit:null,
+                  },
                   child: Text("Login"),
                 ),
               ),
